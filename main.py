@@ -6,8 +6,9 @@ import Escaneo
 import subprocess as sp
 import os
 from powershellHash import valor_hash
+from powershellHash512 import valor_hash512
 
-#opciones
+#Primero se crea un txt con los modulos que ocupo para ejecutar este trabajo
 def main():
     if __name__ == '__main__':
         try:
@@ -19,13 +20,13 @@ def main():
             import nmap
             import socket
             import scapy
-            print("\nCuentas con todos los modulos")
         except ImportError:
             print('\nFaltan modulos')
             os.system("pip install -r requirements.txt")
             print("Los modulos se han instalado correctamente!")
     parser = argparse.ArgumentParser(description = " Opciones: ")
-    parser.add_argument("-Opc",type=int, help='-Opc[1=API VIRUS TOTAL, 2= ENCRIPTAR, 3=CORREOS, 4=HASH, 5=ESCANER]')
+    #opciones del programa
+    parser.add_argument("-Opc",type=int, help='-Opc[1=API VIRUS TOTAL, 2= ENCRIPTAR, 3=CORREOS, 4=HASH, 5=ESCANER, 6=HASH_SHA512]')
     data = parser.parse_args()
     parser.add_argument("-hash", type=str, help='-hash "Ingresa la ruta para sacar hash"')
     if(data.Opc == 1):
@@ -38,6 +39,8 @@ def main():
         valor_hash()
     elif(data.Opc == 5):
         Escaneo.ip_scan()
+    elif(data.Opc == 6):
+        valor_hash512()
     else:
         pass
 
